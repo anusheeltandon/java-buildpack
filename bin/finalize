@@ -24,5 +24,6 @@ $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 require 'java_buildpack/buildpack'
 
 app_dir = ARGV[0]
-puts "app_dir : "+app_dir
+puts "before with_buildpack app_dir : "+app_dir
 JavaBuildpack::Buildpack.with_buildpack(app_dir, 'Finalize failed with exception %s', &:compile)
+puts "after with_buildpack app_dir"
