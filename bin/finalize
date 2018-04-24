@@ -27,3 +27,4 @@ app_dir = ARGV[0]
 puts "before with_buildpack app_dir : "+app_dir
 
 JavaBuildpack::Buildpack.with_buildpack(app_dir, 'Finalize failed with exception %s', &:compile)
+puts "after with_buildpack"
