@@ -263,7 +263,7 @@ module JavaBuildpack
         Logging::LoggerFactory.instance.setup app_dir
 		if Logging::LoggerFactory.instance.initialized
 			logger = Logging::LoggerFactory.instance.get_logger Buildpack
-			@logger.debug { "inside with_buildpack" }
+			logger.debug { "inside with_buildpack" }
 		end
         application = Component::Application.new(app_dir)
 
