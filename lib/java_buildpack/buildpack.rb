@@ -257,6 +257,7 @@ module JavaBuildpack
       # @yield [Buildpack] the buildpack to work with
       # @return [Object] the return value from the given block
       def with_buildpack(app_dir, message)
+		logger = Logging::LoggerFactory.instance.get_logger Buildpack
 		@logger.debug { "inside with_buildpack" }
         app_dir = Pathname.new(File.expand_path(app_dir))
         Logging::LoggerFactory.instance.setup app_dir
