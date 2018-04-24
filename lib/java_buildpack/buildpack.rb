@@ -262,8 +262,11 @@ module JavaBuildpack
         app_dir = Pathname.new(File.expand_path(app_dir))
         Logging::LoggerFactory.instance.setup app_dir
 		
-		@logger.debug { "inside with_buildpack" }
-		
+		if Logging::LoggerFactory.instance.initialized
+			logger1 = Logging::LoggerFactory.instance.get_logger Buildpack
+			logger1.debug { "inside with_buildpack" }
+		end
+		puts "test"
         application = Component::Application.new(app_dir)
 
         yield new(app_dir, application) if block_given?
