@@ -142,7 +142,7 @@ module JavaBuildpack
         'security_providers'    => Component::SecurityProviders.new
       }
 	  
-	  @logger.debug {"AT : mutable_java_home =>"+mutable_java_home.to_json}
+	  @logger.debug {"AT : mutable_java_home =>"+mutable_java_home}
 	  @logger.debug {"AT : immutable_java_home =>"+immutable_java_home.to_json}
 	  @logger.debug {"AT : component_info =>"+component_info.to_json}
 		
