@@ -154,6 +154,7 @@ module JavaBuildpack
 	  @logger.debug {"AT : components =>"+components.to_json}
 	  
       @jres       = instantiate(components['jres'], mutable_java_home, component_info)
+	   @logger.debug {"AT : components =>"+components.to_json}
       @frameworks = instantiate(components['frameworks'], immutable_java_home, component_info)
       @containers = instantiate(components['containers'], immutable_java_home, component_info)
     end
@@ -183,12 +184,22 @@ module JavaBuildpack
     def instantiate(components, java_home, component_info)
 	  
       components.map do |component|
-        @logger.debug { "\n\n\n\nAT : Instantiating #{component} \n using home :: #{java_home} \n and component info :: #{component_info}" }
+        @logger.debug { "AT : Instantiating #{component}" }
 
         require_component(component)
 
         component_id = component.split('::').last.snake_case
-
+		
+		@logger.debug { "AT : component_id  #{component_id}" }
+		@logger.debug { "AT : component_info['application']  #{component_info['application']}" }
+		@logger.debug { "AT : component_info['additional_libraries']  #{component_info['additional_libraries']}" }
+		@logger.debug { "AT : component_info['env_vars']  #{component_info['env_vars']}" }
+		@logger.debug { "AT : component_info['extension_directories']  #{component_info['extension_directories']}" }
+		@logger.debug { "AT : component_info['java_opts']  #{component_info['java_opts']}" }
+		@logger.debug { "AT : component_info['app_dir']  #{component_info['app_dir']}" }
+		@logger.debug { "AT : component_info['networking']  #{component_info['networking']}" }
+		@logger.debug { "AT : component_info['security_providers']  #{component_info['security_providers']}" }
+		
         context = {
           application:   component_info['application'],
           configuration: Util::ConfigurationUtils.load(component_id),
@@ -198,7 +209,7 @@ module JavaBuildpack
                                                 component_info['networking'], component_info['security_providers'])
         }
 		
-		@logger.debug { "\n\n\n\nAT : context  #{context}" }
+		@logger.debug { "\nAT : context  #{context} \n" }
 		
         component.constantize.new(context)
       end
