@@ -183,7 +183,7 @@ module JavaBuildpack
     def instantiate(components, java_home, component_info)
 	  
       components.map do |component|
-        @logger.debug { "\n\n\n\nAT : Instantiating #{component} \n using home :: #{java_home} \n and component info :: #{component_info} }
+        @logger.debug { "\n\n\n\nAT : Instantiating #{component} \n using home :: #{java_home} \n and component info :: #{component_info}" }
 
         require_component(component)
 
@@ -198,7 +198,7 @@ module JavaBuildpack
                                                 component_info['networking'], component_info['security_providers'])
         }
 		
-		@logger.debug {"AT : context #{context}" }
+		@logger.debug { "\n\n\n\nAT : context  #{context}" }
 		
         component.constantize.new(context)
       end
