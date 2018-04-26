@@ -40,6 +40,7 @@ module JavaBuildpack
       # @option context [Hash] :configuration the component's configuration
       # @option context [JavaBuildpack::Component::Droplet] :droplet the droplet
       def initialize(context)
+		@logger            = Logging::LoggerFactory.instance.get_logger BaseComponent
 		@logger.debug { "AT : within BaseComponent initialize" }
         @application    = context[:application]
         @component_name = self.class.to_s.space_case
