@@ -35,6 +35,7 @@ require 'java_buildpack/util/constantize'
 require 'java_buildpack/util/snake_case'
 require 'java_buildpack/util/space_case'
 require 'pathname'
+require 'json'
 
 module JavaBuildpack
 
@@ -125,7 +126,7 @@ module JavaBuildpack
 
       @java_opts = Component::JavaOpts.new(app_dir)
 	  
-	  @logger.debug {"AT : @java_opts =>"+@java_opts}
+	  @logger.debug {"AT : @java_opts =>"+@java_opts.to_json}
 
       mutable_java_home   = Component::MutableJavaHome.new
       immutable_java_home = Component::ImmutableJavaHome.new mutable_java_home, app_dir
