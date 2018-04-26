@@ -183,7 +183,7 @@ module JavaBuildpack
     def instantiate(components, java_home, component_info)
 	  
       components.map do |component|
-        @logger.debug { "Instantiating #{component} #{java_home} #{component_info}" }
+        @logger.debug { "Instantiating #{component} \n using home :: #{java_home} \n and component info :: #{component_info} \n #{component_info.to_json}" }
 
         require_component(component)
 
