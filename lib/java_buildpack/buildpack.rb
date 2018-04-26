@@ -141,7 +141,11 @@ module JavaBuildpack
         'networking'            => Component::Networking.new,
         'security_providers'    => Component::SecurityProviders.new
       }
-
+	  
+	  @logger.debug {"AT : mutable_java_home =>"+mutable_java_home.to_json}
+	  @logger.debug {"AT : immutable_java_home =>"+immutable_java_home.to_json}
+	  @logger.debug {"AT : component_info =>"+component_info.to_json}
+		
       instantiate_components(mutable_java_home, immutable_java_home, component_info)
     end
 
