@@ -266,7 +266,7 @@ module JavaBuildpack
 			logger1 = Logging::LoggerFactory.instance.get_logger Buildpack
 			logger1.debug { "inside with_buildpack" }
 		end
-		puts "test"
+		
         application = Component::Application.new(app_dir)
 
         yield new(app_dir, application) if block_given?
