@@ -116,7 +116,8 @@ module JavaBuildpack
     def initialize(app_dir, application)
       @logger            = Logging::LoggerFactory.instance.get_logger Buildpack
       @buildpack_version = BuildpackVersion.new
-
+	  @logger.debug {"inside initialize"}
+	  
       log_arguments
       log_environment_variables
       log_application_contents application
@@ -262,10 +263,6 @@ module JavaBuildpack
         app_dir = Pathname.new(File.expand_path(app_dir))
         Logging::LoggerFactory.instance.setup app_dir
 		
-		if Logging::LoggerFactory.instance.initialized
-			logger1 = Logging::LoggerFactory.instance.get_logger Buildpack
-			logger1.debug { "inside with_buildpack" }
-		end
 		
         application = Component::Application.new(app_dir)
 
