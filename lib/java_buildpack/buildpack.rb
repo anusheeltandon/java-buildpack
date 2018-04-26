@@ -142,7 +142,7 @@ module JavaBuildpack
         'security_providers'    => Component::SecurityProviders.new
       }
 	  
-	  @logger.debug {"AT : mutable_java_home =>"+mutable_java_home}
+	  @logger.debug {"AT : mutable_java_home =>"+mutable_java_home.to_json}
 	  @logger.debug {"AT : immutable_java_home =>"+immutable_java_home.to_json}
 	  @logger.debug {"AT : component_info =>"+component_info.to_json}
 		
@@ -151,7 +151,8 @@ module JavaBuildpack
 
     def instantiate_components(mutable_java_home, immutable_java_home, component_info)
       components = JavaBuildpack::Util::ConfigurationUtils.load 'components'
-
+	  @logger.debug {"AT : components =>"+components.to_json}
+	  
       @jres       = instantiate(components['jres'], mutable_java_home, component_info)
       @frameworks = instantiate(components['frameworks'], immutable_java_home, component_info)
       @containers = instantiate(components['containers'], immutable_java_home, component_info)
