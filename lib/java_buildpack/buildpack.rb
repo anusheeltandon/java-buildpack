@@ -116,7 +116,7 @@ module JavaBuildpack
     def initialize(app_dir, application)
       @logger            = Logging::LoggerFactory.instance.get_logger Buildpack
       @buildpack_version = BuildpackVersion.new
-	  @logger.debug {"inside initialize"}
+	  @logger.debug {"AT : inside initialize"}
 	  
       log_arguments
       log_environment_variables
@@ -124,6 +124,8 @@ module JavaBuildpack
       log_cache_contents
 
       @java_opts = Component::JavaOpts.new(app_dir)
+	  
+	  @logger.debug {"AT : @java_opts =>"+@java_opts}
 
       mutable_java_home   = Component::MutableJavaHome.new
       immutable_java_home = Component::ImmutableJavaHome.new mutable_java_home, app_dir
