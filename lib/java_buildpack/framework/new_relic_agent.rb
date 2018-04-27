@@ -26,15 +26,15 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
-		@logger            = Logging::LoggerFactory.instance.get_logger NewRelicAgent
-		@logger.debug { "AT : Within compile" }
+		#@logger            = Logging::LoggerFactory.instance.get_logger NewRelicAgent
+		#@logger.debug { "AT : Within compile" }
         download_jar
         @droplet.copy_resources
       end
 
       # (see JavaBuildpack::Component::BaseComponent#release)
       def release
-		@logger.debug { "AT : Within release" }
+		#@logger.debug { "AT : Within release" }
 		
         credentials   = @application.services.find_service(FILTER, [LICENSE_KEY, LICENSE_KEY_USER])['credentials']
         java_opts     = @droplet.java_opts
@@ -68,21 +68,21 @@ module JavaBuildpack
       private_constant :FILTER, :LICENSE_KEY, :LICENSE_KEY_USER
 
       def apply_configuration(credentials, configuration)
-		@logger.debug { "AT : Within apply_configuration" }
+		#@logger.debug { "AT : Within apply_configuration" }
         configuration['log_file_name']  = 'STDOUT'
         configuration[LICENSE_KEY_USER] = credentials[LICENSE_KEY]
         configuration['app_name']       = @application.details['application_name']
       end
 
       def apply_user_configuration(credentials, configuration)
-		@logger.debug { "AT : Within apply_user_configuration" }
+		#@logger.debug { "AT : Within apply_user_configuration" }
         credentials.each do |key, value|
           configuration[key] = value
         end
       end
 
       def write_java_opts(java_opts, configuration)
-		@logger.debug { "AT : Within write_java_opts" }
+		#@logger.debug { "AT : Within write_java_opts" }
         configuration.each do |key, value|
           java_opts.add_system_property("newrelic.config.#{key}", value)
         end
