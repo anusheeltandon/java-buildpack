@@ -113,6 +113,8 @@ module JavaBuildpack
       # @param [String] name an optional name for the download.  Defaults to +@component_name+.
       # @return [Void]
       def download_jar(version, uri, jar_name, target_directory = @droplet.sandbox, name = @component_name)
+		@logger            = Logging::LoggerFactory.instance.get_logger BaseComponent
+		@logger.debug { "AT : download_jar version #{version} uri #{uri} jar_name #{jar_name} target_directory #{target_directory} name #{name}" }
         download(version, uri, name) do |file|
           FileUtils.mkdir_p target_directory
           FileUtils.cp_r(file.path, target_directory + jar_name)
