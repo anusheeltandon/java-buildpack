@@ -73,6 +73,8 @@ module JavaBuildpack
       # @param [String] name an optional name for the download.  Defaults to +@component_name+.
       # @return [Void]
       def download_jar(jar_name = self.jar_name, target_directory = @droplet.sandbox, name = @component_name)
+		@logger            = Logging::LoggerFactory.instance.get_logger VersionedDependencyComponent
+		@logger.debug { "AT : jar_name => #{jar_name} target_directory #{target_directory} name #{name}" }
         super(@version, @uri, jar_name, target_directory, name)
       end
 
