@@ -27,7 +27,7 @@ module JavaBuildpack
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
 		@logger            = Logging::LoggerFactory.instance.get_logger NewRelicAgent
-		@logger.debug { "AT : Within compile #{Time.now.utc.iso8601}" }
+		@logger.debug { "AT : Within compile #{Time.now.utc}" }
         download_jar
         @droplet.copy_resources
       end
@@ -35,7 +35,7 @@ module JavaBuildpack
       # (see JavaBuildpack::Component::BaseComponent#release)
       def release
 		@logger            = Logging::LoggerFactory.instance.get_logger NewRelicAgent
-		@logger.debug { "AT : Within release  #{Time.now.utc.iso8601}" }
+		@logger.debug { "AT : Within release  #{Time.now.utc}" }
 		
         credentials   = @application.services.find_service(FILTER, [LICENSE_KEY, LICENSE_KEY_USER])['credentials']
         java_opts     = @droplet.java_opts
@@ -55,7 +55,7 @@ module JavaBuildpack
       # (see JavaBuildpack::Component::VersionedDependencyComponent#supports?)
       def supports?
 		@logger            = Logging::LoggerFactory.instance.get_logger NewRelicAgent
-		@logger.debug { "AT : Within supports  #{Time.now.utc.iso8601}" }
+		@logger.debug { "AT : Within supports  #{Time.now.utc}" }
         @application.services.one_service? FILTER, [LICENSE_KEY, LICENSE_KEY_USER]
       end
 
@@ -71,7 +71,7 @@ module JavaBuildpack
 
       def apply_configuration(credentials, configuration)
 		@logger            = Logging::LoggerFactory.instance.get_logger NewRelicAgent
-		@logger.debug { "AT : Within apply_configuration  #{Time.now.utc.iso8601}" }
+		@logger.debug { "AT : Within apply_configuration  #{Time.now.utc}" }
         configuration['log_file_name']  = 'STDOUT'
         configuration[LICENSE_KEY_USER] = credentials[LICENSE_KEY]
         configuration['app_name']       = @application.details['application_name']
@@ -79,7 +79,7 @@ module JavaBuildpack
 
       def apply_user_configuration(credentials, configuration)
 		@logger            = Logging::LoggerFactory.instance.get_logger NewRelicAgent
-		@logger.debug { "AT : Within apply_user_configuration  #{Time.now.utc.iso8601}" }
+		@logger.debug { "AT : Within apply_user_configuration  #{Time.now.utc}" }
         credentials.each do |key, value|
           configuration[key] = value
         end
@@ -87,7 +87,7 @@ module JavaBuildpack
 
       def write_java_opts(java_opts, configuration)
 		@logger            = Logging::LoggerFactory.instance.get_logger NewRelicAgent
-		@logger.debug { "AT : Within write_java_opts #{Time.now.utc.iso8601}" }
+		@logger.debug { "AT : Within write_java_opts #{Time.now.utc}" }
         configuration.each do |key, value|
           java_opts.add_system_property("newrelic.config.#{key}", value)
         end
