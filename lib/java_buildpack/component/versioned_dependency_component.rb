@@ -34,6 +34,7 @@ module JavaBuildpack
       #
       # @param [Hash] context a collection of utilities used by components
       # @param [Block, nil] version_validator an optional version validation block
+	  
       def initialize(context, &version_validator)
         super(context)
 
@@ -44,6 +45,11 @@ module JavaBuildpack
           @version = nil
           @uri     = nil
         end
+		
+		@logger            = Logging::LoggerFactory.instance.get_logger VersionedDependencyComponent
+		@logger.debug { "AT : @version => #{@version}" }
+		@logger.debug { "AT : @uri => #{@uri}" }
+		
       end
 
       # (see JavaBuildpack::Component::BaseComponent#detect)
