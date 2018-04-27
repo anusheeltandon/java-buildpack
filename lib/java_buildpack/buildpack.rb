@@ -155,7 +155,7 @@ module JavaBuildpack
 	  
       @jres       = instantiate(components['jres'], mutable_java_home, component_info)
       @frameworks = instantiate(components['frameworks'], immutable_java_home, component_info)
-	  @logger.debug {"AT : frameworks => #{@frameworks}"}
+	  #@logger.debug {"AT : frameworks => #{@frameworks}"}
       @containers = instantiate(components['containers'], immutable_java_home, component_info)
     end
 
@@ -209,7 +209,7 @@ module JavaBuildpack
                                                 component_info['networking'], component_info['security_providers'])
         }
 		
-		@logger.debug { "\nAT : context  #{context} \n" }
+		#@logger.debug { "\nAT : context  #{context} \n" }
 		
         component.constantize.new(context)
       end
