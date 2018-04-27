@@ -117,6 +117,10 @@ module JavaBuildpack
           ->(path) { !in?(path, buildpack_root) || in?(path, @sandbox) },
           true
         )
+		
+		@logger.debug { "@sandbox: #{@sandbox}" }
+		@logger.debug { "@root: #{@root}" }
+		
         @networking         = networking
         @security_providers = security_providers
       end
