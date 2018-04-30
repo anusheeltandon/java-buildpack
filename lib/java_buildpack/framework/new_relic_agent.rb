@@ -38,7 +38,9 @@ module JavaBuildpack
 		@logger.debug { "AT : Within release  #{(Time.now.to_f.round(3)*1000).to_i}" }
 		
         credentials   = @application.services.find_service(FILTER, [LICENSE_KEY, LICENSE_KEY_USER])['credentials']
+		@logger.debug { "AT : Within release :: Credentials ::  "+credentials }
         java_opts     = @droplet.java_opts
+		@logger.debug { "AT : Within release :: java_opts ::  "+java_opts }
         configuration = {}
 
         apply_configuration(credentials, configuration)

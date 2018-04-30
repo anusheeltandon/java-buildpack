@@ -192,7 +192,6 @@ module JavaBuildpack
 		
 		@logger.debug { "AT : component_id  #{component_id}" }
 		@logger.debug { "AT : component_info['application']  #{component_info['application']}" }
-		puts "application object YAML :: "+component_info['application'].to_yaml
 		@logger.debug { "AT : component_info['additional_libraries']  #{component_info['additional_libraries']}" }
 		@logger.debug { "AT : component_info['env_vars']  #{component_info['env_vars']}" }
 		@logger.debug { "AT : component_info['extension_directories']  #{component_info['extension_directories']}" }
