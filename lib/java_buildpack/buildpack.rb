@@ -191,14 +191,15 @@ module JavaBuildpack
         component_id = component.split('::').last.snake_case
 		
 		@logger.debug { "AT : component_id  #{component_id}" }
-		@logger.debug { "AT : component_info['application']  #{component_info['application']}" }
-		@logger.debug { "AT : component_info['additional_libraries']  #{component_info['additional_libraries']}" }
-		@logger.debug { "AT : component_info['env_vars']  #{component_info['env_vars']}" }
-		@logger.debug { "AT : component_info['extension_directories']  #{component_info['extension_directories']}" }
-		@logger.debug { "AT : component_info['java_opts']  #{component_info['java_opts']}" }
-		@logger.debug { "AT : component_info['app_dir']  #{component_info['app_dir']}" }
-		@logger.debug { "AT : component_info['networking']  #{component_info['networking']}" }
-		@logger.debug { "AT : component_info['security_providers']  #{component_info['security_providers']}" }
+		#@logger.debug { "AT : component_info['application']  #{component_info['application']}" }
+		lego(component_id, "AT : component_info['application']  #{component_info['application']}")
+		lego(component_id, "AT : component_info['additional_libraries']  #{component_info['additional_libraries']}" )
+		lego(component_id, "AT : component_info['env_vars']  #{component_info['env_vars']}" )
+		lego(component_id, "AT : component_info['extension_directories']  #{component_info['extension_directories']}" )
+		lego(component_id, "AT : component_info['java_opts']  #{component_info['java_opts']}" )
+		lego(component_id, "AT : component_info['app_dir']  #{component_info['app_dir']}" )
+		lego(component_id, "AT : component_info['networking']  #{component_info['networking']}" )
+		lego(component_id, "AT : component_info['security_providers']  #{component_info['security_providers']}" )
 		
         context = {
           application:   component_info['application'],
@@ -214,6 +215,12 @@ module JavaBuildpack
         component.constantize.new(context)
       end
     end
+	
+	def lego(component_id, print_this)
+		if component_id == "new_relic_agent"
+			@logger.debug { "#{print_this}" }
+		end
+	end
 
     def log_application_contents(application)
       @logger.debug do
