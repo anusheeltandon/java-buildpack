@@ -62,6 +62,7 @@ module JavaBuildpack
     #
     # @return [Void]
     def compile
+		@logger.debug { "Inside compile" }
       puts BUILDPACK_MESSAGE % @buildpack_version
 
       container = component_detection('container', @containers, true).first
@@ -80,6 +81,7 @@ module JavaBuildpack
     #
     # @return [String] The payload required to run the application.
     def release
+		@logger.debug { "Inside release" }
       container = component_detection('container', @containers, true).first
       no_container unless container
 
