@@ -85,6 +85,7 @@ module JavaBuildpack
         credentials.each do |key, value|
           configuration[key] = value
         end
+		
       end
 
       def write_java_opts(java_opts, configuration)
@@ -93,6 +94,7 @@ module JavaBuildpack
         configuration.each do |key, value|
           java_opts.add_system_property("newrelic.config.#{key}", value)
         end
+		@logger.debug { "AT : java_opts :: configuration  #{configuration}" }
       end
 
     end
