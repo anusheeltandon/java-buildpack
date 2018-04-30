@@ -40,16 +40,20 @@ module JavaBuildpack
         credentials   = @application.services.find_service(FILTER, [LICENSE_KEY, LICENSE_KEY_USER])['credentials']
 		@logger.debug { "AT : Within release :: Credentials ::  #{credentials}" }
         java_opts     = @droplet.java_opts
-		@logger.debug { "AT : Within release :: java_opts ::  #{java_opts}" }
+		@logger.debug { "AT : Within release :: java_opts 1 ::  #{java_opts}" }
         configuration = {}
 
         apply_configuration(credentials, configuration)
         apply_user_configuration(credentials, configuration)
         write_java_opts(java_opts, configuration)
-
+		
+		@logger.debug { "AT : Within release :: java_opts 2 ::  #{java_opts}" }
+		
         java_opts.add_javaagent(@droplet.sandbox + jar_name)
                  .add_system_property('newrelic.home', @droplet.sandbox)
         java_opts.add_system_property('newrelic.enable.java.8', 'true') if @droplet.java_home.java_8_or_later?
+		
+		@logger.debug { "AT : Within release :: java_opts 3 ::  #{java_opts}" }
       end
 
       protected
