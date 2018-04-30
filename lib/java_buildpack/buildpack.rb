@@ -62,7 +62,7 @@ module JavaBuildpack
     #
     # @return [Void]
     def compile
-		@logger.debug { "Inside compile" }
+	  @logger.debug { "AT : Inside compile" }
       puts BUILDPACK_MESSAGE % @buildpack_version
 
       container = component_detection('container', @containers, true).first
@@ -81,20 +81,26 @@ module JavaBuildpack
     #
     # @return [String] The payload required to run the application.
     def release
-		@logger.debug { "Inside release" }
+	  @logger.debug { "AT : Inside release" }
       container = component_detection('container', @containers, true).first
       no_container unless container
 
+	  @logger.debug { "AT : release() : #{container.to_yaml}" }
+	  
       commands = []
       commands << component_detection('JRE', @jres, true).first.release
-
+	  @logger.debug { "AT : release() : commands 1 #{commands}" }
+		
       component_detection('framework', @frameworks, false).map(&:release)
 
       commands << container.release
-
+	  @logger.debug { "AT : release() : commands 2 #{commands}" }
+	  
       commands.insert 0, @java_opts.as_env_var
+	  @logger.debug { "AT : release() : commands 3 #{commands}" }
+	  
       command = commands.flatten.compact.join(' && ')
-
+		@logger.debug { "AT : release() : commands 4 #{commands}" }
       payload = {
         'addons'                => [],
         'config_vars'           => {},
