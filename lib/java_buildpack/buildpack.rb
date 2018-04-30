@@ -126,7 +126,7 @@ module JavaBuildpack
 
       @java_opts = Component::JavaOpts.new(app_dir)
 	  
-	  @logger.debug {"AT : @java_opts =>"+@java_opts.to_json}
+	  #@logger.debug {"AT : @java_opts =>"+@java_opts.to_json}
 
       mutable_java_home   = Component::MutableJavaHome.new
       immutable_java_home = Component::ImmutableJavaHome.new mutable_java_home, app_dir
@@ -142,9 +142,9 @@ module JavaBuildpack
         'security_providers'    => Component::SecurityProviders.new
       }
 	  
-	  @logger.debug {"AT : mutable_java_home =>"+mutable_java_home.to_json}
-	  @logger.debug {"AT : immutable_java_home =>"+immutable_java_home.to_json}
-	  @logger.debug {"AT : component_info =>"+component_info.to_json}
+	  #@logger.debug {"AT : mutable_java_home =>"+mutable_java_home.to_json}
+	  #@logger.debug {"AT : immutable_java_home =>"+immutable_java_home.to_json}
+	  #@logger.debug {"AT : component_info =>"+component_info.to_json}
 		
       instantiate_components(mutable_java_home, immutable_java_home, component_info)
     end
@@ -184,7 +184,7 @@ module JavaBuildpack
     def instantiate(components, java_home, component_info)
 	  
       components.map do |component|
-        @logger.debug { "AT : Instantiating #{component}" }
+        @logger.debug { "\n\n\nAT : Instantiating #{component}" }
 
         require_component(component)
 
@@ -210,7 +210,7 @@ module JavaBuildpack
                                                 component_info['networking'], component_info['security_providers'])
         }
 		
-		#@logger.debug { "\nAT : context  #{context} \n" }
+		lego(component_id,  "AT : context  #{context} \n" )
 		
         component.constantize.new(context)
       end
