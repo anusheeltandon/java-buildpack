@@ -210,7 +210,7 @@ module JavaBuildpack
                                                 component_info['networking'], component_info['security_providers'])
         }
 		
-		lego(component_id,  "AT : context  #{context} \n" )
+		lego(component_id,  "AT : context  #{context.to_yaml} \n" )
 		
         component.constantize.new(context)
       end
