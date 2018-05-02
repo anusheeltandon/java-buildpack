@@ -54,7 +54,11 @@ module JavaBuildpack
       def release
 	    @logger            = Logging::LoggerFactory.instance.get_logger JavaMain
 		@logger.debug { "AT : Within release  " }
+		@logger.debug { "AT : @droplet.additional_libraries = #{@droplet.additional_libraries}" }
         manifest_class_path.each { |path| @droplet.additional_libraries << path }
+		
+		@logger.debug { "AT : @spring_boot_utils.is => #{@spring_boot_utils.is}" }
+		@logger.debug { "AT : @application.root => #{@application.root}" }
 
         if @spring_boot_utils.is?(@application)
           @droplet.environment_variables.add_environment_variable 'SERVER_PORT', '$PORT'
@@ -62,10 +66,10 @@ module JavaBuildpack
           @droplet.additional_libraries.insert 0, @application.root
         end
 
+		@logger.debug { "AT : @droplet.additional_libraries.as_classpath => #{@droplet.additional_libraries.as_classpath}" }
         classpath = @spring_boot_utils.is?(@application) ? '-cp $PWD/.' : @droplet.additional_libraries.as_classpath
         x = release_text(classpath)
 		@logger.debug { "AT : x = #{x}" }
-		x
 		x
       end
 
@@ -100,7 +104,10 @@ module JavaBuildpack
 
       def manifest_class_path
         values = JavaBuildpack::Util::JavaMainUtils.manifest(@application)[CLASS_PATH_PROPERTY]
-        values.nil? ? [] : values.split(' ').map { |value| @droplet.root + value }
+		@logger.debug { "AT : values = #{values}" }
+        y = values.nil? ? [] : values.split(' ').map { |value| @droplet.root + value }
+		@logger.debug { "AT : y = #{y}" }
+		y
       end
 
     end
