@@ -50,8 +50,12 @@ module JavaBuildpack
         # @return [Properties] the properties from the application's manifest (if any)
         def manifest(application)
           manifest_file = application.root + 'META-INF/MANIFEST.MF'
+		  @logger.debug { "AT : manifest_file1 => #{manifest_file}" }
           manifest_file = manifest_file.exist? ? manifest_file : nil
-          JavaBuildpack::Util::Properties.new(manifest_file)
+		  @logger.debug { "AT : manifest_file2 => #{manifest_file}" }
+          gg=JavaBuildpack::Util::Properties.new(manifest_file)
+		  @logger.debug { "AT : gg => #{gg}" }
+		  gg
         end
 
         MAIN_CLASS_PROPERTY = 'java_main_class'
