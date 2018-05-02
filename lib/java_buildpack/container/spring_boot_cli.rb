@@ -46,11 +46,13 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#release)
       def release
+		@logger            = Logging::LoggerFactory.instance.get_logger SpringBootCLI
+		@logger.debug { "AT : Within release  " }
         @droplet.environment_variables
                 .add_environment_variable('JAVA_OPTS', '$JAVA_OPTS')
                 .add_environment_variable('SERVER_PORT', '$PORT')
 
-        [
+        x = [
           @droplet.environment_variables.as_env_vars,
           @droplet.java_home.as_env_var,
           'exec',
@@ -59,6 +61,8 @@ module JavaBuildpack
           @droplet.additional_libraries.as_classpath,
           relative_groovy_files
         ].flatten.compact.join(' ')
+		@logger.debug { "AT : x = #{x}" }
+		x
       end
 
       protected

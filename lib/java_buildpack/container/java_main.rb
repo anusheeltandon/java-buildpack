@@ -52,6 +52,8 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#release)
       def release
+	    @logger            = Logging::LoggerFactory.instance.get_logger JavaMain
+		@logger.debug { "AT : Within release  " }
         manifest_class_path.each { |path| @droplet.additional_libraries << path }
 
         if @spring_boot_utils.is?(@application)
@@ -61,7 +63,10 @@ module JavaBuildpack
         end
 
         classpath = @spring_boot_utils.is?(@application) ? '-cp $PWD/.' : @droplet.additional_libraries.as_classpath
-        release_text(classpath)
+        x = release_text(classpath)
+		@logger.debug { "AT : x = #{x}" }
+		x
+		x
       end
 
       private
