@@ -57,7 +57,7 @@ module JavaBuildpack
 		@logger.debug { "AT : @droplet.additional_libraries = #{@droplet.additional_libraries}" }
         manifest_class_path.each { |path| @droplet.additional_libraries << path }
 		
-		@logger.debug { "AT : @spring_boot_utils.is => #{@spring_boot_utils.is}" }
+		@logger.debug { "AT : @spring_boot_utils.is? => #{@spring_boot_utils.is?(@application)}" }
 		@logger.debug { "AT : @application.root => #{@application.root}" }
 
         if @spring_boot_utils.is?(@application)

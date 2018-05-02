@@ -36,8 +36,12 @@ module JavaBuildpack
         # @param [Hash] configuration the Java main configuration or +nil+ if this is not provided
         # @return [String, nil] the Java main class name or +nil+ if there is no Java main class name
         def main_class(application, configuration = nil)
+		  @logger            = Logging::LoggerFactory.instance.get_logger JavaMainUtils
+		  @logger.debug { "AT : Within main_class  " }
           config = configuration || JavaBuildpack::Util::ConfigurationUtils.load('java_main')
-          config[MAIN_CLASS_PROPERTY] || manifest(application)[MANIFEST_PROPERTY]
+		  @logger.debug { "AT : config => #{config}" }
+          xx=config[MAIN_CLASS_PROPERTY] || manifest(application)[MANIFEST_PROPERTY]
+		  @logger.debug { "AT : xx => #{xx}" }
         end
 
         # Return the manifest properties of the given application.
