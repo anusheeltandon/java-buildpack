@@ -112,6 +112,7 @@ module JavaBuildpack
         end
 
         def load_configuration(file, user_provided, var_name, clean_nil_values, should_log)
+		
           configuration = YAML.load_file(file)
           logger.debug { "Configuration from #{file}: #{configuration}" } if should_log
 

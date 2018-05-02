@@ -225,7 +225,7 @@ module JavaBuildpack
     end
 	
 	def lego(component_id, print_this)
-		if component_id == "new_relic_agent"
+		if component_id == "java_main"
 			@logger.debug { "#{print_this}" }
 		end
 	end
