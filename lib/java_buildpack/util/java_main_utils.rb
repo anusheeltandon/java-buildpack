@@ -49,6 +49,7 @@ module JavaBuildpack
         # @param [JavaBuildpack::Application::Application] application the application
         # @return [Properties] the properties from the application's manifest (if any)
         def manifest(application)
+			@logger            = Logging::LoggerFactory.instance.get_logger JavaMainUtils
           manifest_file = application.root + 'META-INF/MANIFEST.MF'
 		  @logger.debug { "AT : manifest_file1 => #{manifest_file}" }
           manifest_file = manifest_file.exist? ? manifest_file : nil

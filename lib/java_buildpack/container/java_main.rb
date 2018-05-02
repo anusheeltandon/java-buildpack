@@ -103,6 +103,7 @@ module JavaBuildpack
       end
 
       def manifest_class_path
+		 @logger            = Logging::LoggerFactory.instance.get_logger JavaMain
         values = JavaBuildpack::Util::JavaMainUtils.manifest(@application)[CLASS_PATH_PROPERTY]
 		@logger.debug { "AT : values = #{values}" }
         y = values.nil? ? [] : values.split(' ').map { |value| @droplet.root + value }
