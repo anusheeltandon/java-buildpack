@@ -131,7 +131,7 @@ module JavaBuildpack
       log_environment_variables
       log_application_contents application
       log_cache_contents
-	  log_startup_scripts ARGV[3]
+	  log_startup_scripts ARGV[4]
 
       @java_opts = Component::JavaOpts.new(app_dir)
 	  
