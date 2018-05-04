@@ -262,11 +262,14 @@ module JavaBuildpack
     end
 	
 	def log_startup_scripts(profile_d_dir)
+		return unless JavaBuildpack::Util::Cache::ApplicationCache.available?
       @logger.debug do
+		script_root = Pathname.new profile_d_dir
+		
         paths = []
-        profile_d_dir.find { |f| paths << f.relative_path_from(profile_d_dir).to_s }
+        script_root.find { |f| paths << f.relative_path_from(script_root).to_s }
 
-        "Profile.d scripts (#{profile_d_dir}): #{paths}"
+        "Profile.d scripts (#{script_root}): #{paths}"
       end
     end
 
