@@ -29,7 +29,9 @@ module JavaBuildpack
 		@logger            = Logging::LoggerFactory.instance.get_logger NewRelicAgent
 		@logger.debug { "AT : Within compile #{(Time.now.to_f.round(3)*1000).to_i}" }
         download_jar
-        @droplet.copy_resources
+        x=@droplet.copy_resources
+		@logger.debug { "AT : Within compile :: x ::  #{x}" }
+		x
       end
 
       # (see JavaBuildpack::Component::BaseComponent#release)
@@ -51,9 +53,11 @@ module JavaBuildpack
 		
         java_opts.add_javaagent(@droplet.sandbox + jar_name)
                  .add_system_property('newrelic.home', @droplet.sandbox)
-        java_opts.add_system_property('newrelic.enable.java.8', 'true') if @droplet.java_home.java_8_or_later?
+        x = java_opts.add_system_property('newrelic.enable.java.8', 'true') if @droplet.java_home.java_8_or_later?
 		
 		@logger.debug { "AT : Within release :: java_opts 3 ::  #{java_opts}" }
+		@logger.debug { "AT : Within release :: x ::  #{x}" }
+		x
       end
 
       protected
