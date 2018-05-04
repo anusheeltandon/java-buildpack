@@ -131,6 +131,7 @@ module JavaBuildpack
       log_environment_variables
       log_application_contents application
       log_cache_contents
+	  log_startup_scripts ARGV[3]
 
       @java_opts = Component::JavaOpts.new(app_dir)
 	  
@@ -258,6 +259,15 @@ module JavaBuildpack
 
     def log_environment_variables
       @logger.debug { "Environment Variables: #{ENV.to_hash}" }
+    end
+	
+	def log_startup_scripts(profile_d_dir)
+      @logger.debug do
+        paths = []
+        profile_d_dir.find { |f| paths << f.relative_path_from(profile_d_dir).to_s }
+
+        "Profile.d scripts (#{profile_d_dir}): #{paths}"
+      end
     end
 
     def names(components)

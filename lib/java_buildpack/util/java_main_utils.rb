@@ -42,6 +42,7 @@ module JavaBuildpack
 		  @logger.debug { "AT : config => #{config}" }
           xx=config[MAIN_CLASS_PROPERTY] || manifest(application)[MANIFEST_PROPERTY]
 		  @logger.debug { "AT : xx => #{xx}" }
+		  xx
         end
 
         # Return the manifest properties of the given application.
