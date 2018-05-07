@@ -84,7 +84,7 @@ module JavaBuildpack
       def release_text(classpath)
         [
           @droplet.environment_variables.as_env_vars,
-		  #' && echo Anusheel && ',
+		  ' && echo Anusheel && ',
           'eval',
           'exec',
           "#{qualify_path @droplet.java_home.root, @droplet.root}/bin/java",
